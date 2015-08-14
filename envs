@@ -1,0 +1,31 @@
+#
+# Postgres credentials
+#
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres 
+PGDATA=/var/lib/postgresql/data
+
+#
+# AWS Credentials for WAL-E
+#
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+WALE_S3_PREFIX=
+
+#
+# Initial settings for Wal-e
+#
+
+# Whether WAL-e should firstly pull the latest basebackup
+INIT_PULL_BACKUP=false
+
+# Whether WAL-e should push WAL archives after starting 
+BACKUP_PUSH=true
+
+#
+# When backup-push = true
+#
+BASE_BACKUP_CRON=0 1 * * *
+
+DELETE_BACKUP_CRON=0 1 * * *
+DELETE_BACKUP_RETAIN=10
