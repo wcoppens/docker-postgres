@@ -95,6 +95,8 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 			exit 1
 		fi
 
+		sleep 3
+
 		set_listen_addresses '*'
 
 		echo
