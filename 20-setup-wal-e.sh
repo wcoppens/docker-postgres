@@ -41,7 +41,8 @@ else
 
                     su - postgres -c "echo \"restore_command = 'envdir /etc/wal-e.d/env /usr/local/bin/wal-e wal-fetch \"%f\" \"%p\"'\" > /var/lib/postgresql/data/recovery.conf"
 
-                    gosu postgres "postgres" & pid="$!"
+                    gosu postgres "postgres" &
+		            pid="$!"
 
                 fi
             fi
