@@ -29,7 +29,7 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 				WARNING: No password has been set for the database.
 				         This will allow anyone with access to the
 				         Postgres port to access your database. In
-				         Docker's default configuration, this is
+				         Dockers default configuration, this is
 				         effectively any other container on the same
 				         system.
 				         Use "-e POSTGRES_PASSWORD=password" to set
@@ -43,7 +43,7 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 
 		{ echo; echo "host all all 0.0.0.0/0 $authMethod"; } >> "$PGDATA/pg_hba.conf"
 
-		set_listen_addresses '' # we're going to start up postgres, but it's not ready for use yet (this is initialization), so don't listen to the outside world yet
+		set_listen_addresses '*' # we're going to start up postgres, but it's not ready for use yet (this is initialization), so don't listen to the outside world yet
 
 		gosu postgres "postgres" &
 		pid="$!"
@@ -94,10 +94,6 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 			echo >&2 'PostgreSQL init process failed'
 			exit 1
 		fi
-
-		sleep 3
-
-		set_listen_addresses '*'
 
 		echo
 		echo 'PostgreSQL init process complete; ready for start up.'
