@@ -86,7 +86,6 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 		for f in /docker-entrypoint-initdb.d/*; do
 			case "$f" in
 				*.sh)  echo "$0: running $f"; . "$f" ;;
-				*.sql) echo "$0: running $f"; psql --username postgres --dbname "$POSTGRES_DB" < "$f" && echo ;;
 				*)     echo "$0: ignoring $f" ;;
 			esac
 			echo
@@ -95,8 +94,7 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 		echo 'AFTER /docker-entrypoint-initdb.d/'
 
 		if ! kill -s TERM "$pid" || ! wait "$pid"; then
-			echo >&2 'PostgreSQL init process failed'
-			exit 1
+			echo >&2 'No need to kill PostgreSQL since its not running'
 		fi
 
 		echo
