@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo '$INIT_PULL_BACKUP'
+echo '$BACKUP_PUSH'
+
 if [ "$AWS_ACCESS_KEY_ID" = "" ]
 then
     echo "AWS_ACCESS_KEY_ID does not exist"
@@ -38,7 +41,7 @@ else
 
                     su - postgres -c "echo \"restore_command = 'envdir /etc/wal-e.d/env /usr/local/bin/wal-e wal-fetch \"%f\" \"%p\"'\" > /var/lib/postgresql/data/recovery.conf"
 
-                    gosu postgres "postgres"
+                    gosu postgres "postgres" & pid="$!"
 
                 fi
             fi
