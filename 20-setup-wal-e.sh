@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo '$INIT_PULL_BACKUP'
-echo '$BACKUP_PUSH'
+echo $INIT_PULL_BACKUP
+echo $BACKUP_PUSH
 
 if [ "$AWS_ACCESS_KEY_ID" = "" ]
 then
