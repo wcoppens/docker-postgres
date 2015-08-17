@@ -80,8 +80,6 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 		EOSQL
 		echo
 
-		echo 'BEFORE /docker-entrypoint-initdb.d/'
-
 		echo
 		for f in /docker-entrypoint-initdb.d/*; do
 			case "$f" in
@@ -90,8 +88,6 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 			esac
 			echo
 		done
-
-		echo 'AFTER /docker-entrypoint-initdb.d/'
 
 		if ! kill -s TERM "$pid" || ! wait "$pid"; then
 			echo >&2 'No need to kill PostgreSQL since its not running'

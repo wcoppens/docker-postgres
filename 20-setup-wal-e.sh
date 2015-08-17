@@ -49,8 +49,8 @@ else
                 echo "archive_command = 'envdir /etc/wal-e.d/env /usr/local/bin/wal-e wal-push %p'" >> /var/lib/postgresql/data/postgresql.conf
                 echo "archive_timeout = 60" >> /var/lib/postgresql/data/postgresql.conf
 
-                echo "$BASE_BACKUP_CRON postgres /usr/bin/envdir /etc/wal-e.d/env /usr/local/bin/wal-e backup-push /var/lib/postgresql/data" >> /etc/cron.d/wal-e
-                echo "$DELETE_BACKUP_CRON postgres /usr/bin/envdir /etc/wal-e.d/env /usr/local/bin/wal-e delete --confirm retain $DELETE_BACKUP_RETAIN" > /etc/cron.d/wal-e
+                echo "$BASE_BACKUP_CRON postgres /usr/bin/envdir /etc/wal-e.d/env /usr/local/bin/wal-e backup-push /var/lib/postgresql/data" > /etc/cron.d/wal-e
+                echo "$DELETE_BACKUP_CRON postgres /usr/bin/envdir /etc/wal-e.d/env /usr/local/bin/wal-e delete --confirm retain $DELETE_BACKUP_RETAIN" >> /etc/cron.d/wal-e
             fi
         fi
     fi

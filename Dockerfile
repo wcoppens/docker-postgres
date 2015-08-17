@@ -23,6 +23,8 @@ RUN virtualenv /var/lib/postgresql/wal-e &&\
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN mkdir -p /var/log/supervisor
+
 RUN touch /firstrun
 
 ADD 10-fix-acl.sh /docker-entrypoint-initdb.d/
