@@ -39,9 +39,9 @@ else
                             exit 1
                         fi
     
-                        su - postgres -c "envdir /etc/wal-e.d/env /usr/local/bin/wal-e backup-fetch /var/lib/postgresql/data LATEST"
+                        su - postgres -c "envdir /etc/wal-e.d/env /usr/local/bin/wal-e backup-fetch $PGDATA LATEST"
     
-                        chown -R postgres:postgres /var/lib/postgresql/data
+                        chown -R postgres:postgres $PGDATA
     
                         su - postgres -c "echo \"restore_command = 'envdir /etc/wal-e.d/env /usr/local/bin/wal-e wal-fetch \"%f\" \"%p\"'\" > /var/lib/postgresql/data/recovery.conf"
     
@@ -56,7 +56,7 @@ else
                     echo "archive_command = 'envdir /etc/wal-e.d/env /usr/local/bin/wal-e wal-push %p'" >> /var/lib/postgresql/data/postgresql.conf
                     echo "archive_timeout = 60" >> /var/lib/postgresql/data/postgresql.conf
     
-                    echo "$BASE_BACKUP_CRON postgres /usr/bin/envdir /etc/wal-e.d/env /usr/local/bin/wal-e backup-push /var/lib/postgresql/data" > /etc/cron.d/wal-e
+                    echo "$BASE_BACKUP_CRON postgres /usr/bin/envdir /etc/wal-e.d/env /usr/local/bin/wal-e backup-push $PGDATA" > /etc/cron.d/wal-e
                     echo "$DELETE_BACKUP_CRON postgres /usr/bin/envdir /etc/wal-e.d/env /usr/local/bin/wal-e delete --confirm retain $DELETE_BACKUP_RETAIN" >> /etc/cron.d/wal-e
                 fi
             fi
