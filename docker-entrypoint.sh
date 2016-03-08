@@ -96,6 +96,14 @@ if [ "$1" = '/usr/bin/supervisord' ]; then
 		echo
 		echo 'PostgreSQL init process complete; ready for start up.'
 		echo
+	else
+		for f in /docker-entrypoint-initdb.d/*; do
+			case "$f" in
+				*.sh)  echo "$0: running $f"; . "$f" ;;
+				*)     echo "$0: ignoring $f" ;;
+			esac
+			echo
+		done
 	fi
 
 	exec "$@"
