@@ -1,4 +1,4 @@
-FROM postgres:9.4.5
+FROM postgres:9.4
 MAINTAINER Wesley Coppens <wesley@enelogic.com>
 
 RUN apt-get update && apt-get install -y libxml2-dev \
