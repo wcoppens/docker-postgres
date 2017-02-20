@@ -1,10 +1,11 @@
-FROM postgres:9
+FROM postgres:9.5
 MAINTAINER Wesley Coppens <wesley@enelogic.com>
 
 RUN apt-get update && apt-get install -y libxml2-dev \
   libxslt1-dev \
-  python-dev \
-  python-pip \
+  python3 \
+  python3-dev \
+  python3-pip \
   daemontools \
   libevent-dev \
   lzop \
@@ -12,13 +13,13 @@ RUN apt-get update && apt-get install -y libxml2-dev \
   libffi-dev \
   libssl-dev \
   cron \
-  supervisor &&\
-  pip install virtualenv
+  supervisor && \
+  pip3 install virtualenv
 
 # Install WAL-E into a virtualenv
 RUN virtualenv /var/lib/postgresql/wal-e &&\
   . /var/lib/postgresql/wal-e/bin/activate &&\
-  pip install wal-e &&\
+  pip3 install wal-e &&\
   ln -s -f /var/lib/postgresql/wal-e/bin/wal-e /usr/local/bin/wal-e
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
