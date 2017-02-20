@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y libxml2-dev \
 # Install WAL-E into a virtualenv
 RUN virtualenv /var/lib/postgresql/wal-e &&\
   . /var/lib/postgresql/wal-e/bin/activate &&\
-  pip3 install wal-e &&\
+  pip3 install wal-e[aws] &&\
   ln -s -f /var/lib/postgresql/wal-e/bin/wal-e /usr/local/bin/wal-e
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
